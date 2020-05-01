@@ -1,0 +1,284 @@
+<h1>iSign</h1>
+<p>iSign is a sign language recognition system from the perspective of the signer. Get the most updated code from <a href="https://github.com/adsau59/isign">GitHub</a>.</p>
+<p><img src="https://i.postimg.cc/nx61KzGf/wearing.jpg?dl=1" alt="Signing"></p>
+<h3>Objective:</h3>
+<ul>
+<li>To create a system, affordable and usable by mute to reduce the communication barrier between them and the people who don't understand sign language.</li>
+</ul>
+<h3>Technology Stack</h3>
+<p>iSign is made using,</p>
+<ul>
+<li><a href="https://www.python.org/downloads/release/python-357/">Python v3.5.x</a></li>
+<li><a href="https://github.com/CMU-Perceptual-Computing-Lab/openpose">OpenPose</a></li>
+<li><a href="https://keras.io/">Keras</a> (with <a href="https://www.tensorflow.org/">Tenserflow</a> backend)</li>
+<li><a href="https://docs.python.org/3/library/pickle.html">Pickle</a></li>
+<li><a href="https://matplotlib.org/">Matplotlib</a></li>
+<li><a href="https://unity.com/">Unity</a></li>
+</ul>
+<h3>Hardware Requirements</h3>
+<ul>
+<li>Controller: <a href="https://www.raspberrypi.org/products/raspberry-pi-3-model-b-plus/">Rasberry Pi 3 Model B+</a></li>
+<li>DPU: A Powerful Computer for realtime performance (Tested on i7-4700HQ, Nvidia Gtx 860m, 8GB DDR3 RAM).</li>
+<li>Gyroscope: <a href="https://www.amazon.in/REES52-GY-521-Mpu6050-Accelerometer-Arduino/dp/B008BOPN40">MPU-6050 Triple Axis Accelerometer and Gyro Breakout Board</a></li>
+<li>Webcam (atleast with 480p resolution)</li>
+<li>Touch Sensor: <a href="https://www.adafruit.com/product/1362">Standalone 5-Pad Capacitive Touch Sensor Breakout - Adafruit</a></li>
+</ul>
+<h3>Features</h3>
+<ul>
+<li>Realtime performance, use the sign language recognition system in real time to translate gestures made into text.</li>
+<li>Portable, take the system on the road with you, to help you talk to other people.</li>
+</ul>
+<h3>Project Structure</h3>
+<p>The project is divided into 3 parts</p>
+<ul>
+<li><code>component-test</code> contains the scripts to test out the different components of the system.</li>
+<li><code>phone-screen-show</code> contains the unity project which is used to receive the output sent by the DPU in realtime translation.</li>
+<li><code>sensor-data-sender</code> contains scripts which are used to send data from the controller to the DPU, and also scripts to process the data.</li>
+</ul>
+<h3>How to Use?</h3>
+<h4>Hardware Setup</h4>
+<ul>
+<li>You can check out the images for the assembled system <a href="https://postimg.cc/gallery/mfo16sr4/">here</a>.</li>
+<li>You will need a solid mask, electrical tape, 20m copper wire, double sided tape, hot glue gun.</li>
+<li>Connect MPU-6050 Triple Axis Accelerometer and Gyro Breakout Board to the Raspberry Pi 3 B+  in this configuration:</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">MPU-6050</th>
+<th style="text-align:center">Raspberry Pi</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">VCC</td>
+<td style="text-align:center">5V pin</td>
+</tr>
+<tr>
+<td style="text-align:center">GND</td>
+<td style="text-align:center">Ground pin</td>
+</tr>
+<tr>
+<td style="text-align:center">SCL</td>
+<td style="text-align:center">SCL</td>
+</tr>
+<tr>
+<td style="text-align:center">SDA</td>
+<td style="text-align:center">SDA</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>Position MPU-6050 behind the mask on the forehead, and tape it.</li>
+<li>Connect the 5-Pad Capacitive Touch Breakout to raspberry pi, in this configuration:</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">Touch Breakout</th>
+<th style="text-align:center">Raspberry PI</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">VCC</td>
+<td style="text-align:center">5V pin</td>
+</tr>
+<tr>
+<td style="text-align:center">GND</td>
+<td style="text-align:center">Ground pin</td>
+</tr>
+<tr>
+<td style="text-align:center">Pad0 Output</td>
+<td style="text-align:center">GPIO 22</td>
+</tr>
+<tr>
+<td style="text-align:center">Pad1 Output</td>
+<td style="text-align:center">GPIO 27</td>
+</tr>
+<tr>
+<td style="text-align:center">Pad2 Output</td>
+<td style="text-align:center">GPIO 17</td>
+</tr>
+<tr>
+<td style="text-align:center">Pad3 Output</td>
+<td style="text-align:center">GPIO 24</td>
+</tr>
+<tr>
+<td style="text-align:center">Pad4 Output</td>
+<td style="text-align:center">GPIO 23</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>Use copper wire to expose the input pins, on the mask in this configuration, and tape it:</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">Touch Breakout</th>
+<th style="text-align:center">Raspberry Pi</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">Pad0</td>
+<td style="text-align:center">Forehead</td>
+</tr>
+<tr>
+<td style="text-align:center">Pad1</td>
+<td style="text-align:center">Nose</td>
+</tr>
+<tr>
+<td style="text-align:center">Pad2</td>
+<td style="text-align:center">Chin</td>
+</tr>
+<tr>
+<td style="text-align:center">Pad3</td>
+<td style="text-align:center">Ear</td>
+</tr>
+<tr>
+<td style="text-align:center">Pad4</td>
+<td style="text-align:center">Cheeks</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>Tape the sensor on the left cheek, and all the exposed wire on the right side of the mask. (Opposite if the user is a left handed signer)</li>
+<li>Make sure the copper wires have enough padding with the mask so that, when the user wears the mask, the users face does interfere with the sensor.</li>
+<li>Glue the webcam to the top of the mask, such that it is positioned, where the signer hand is in the FOV of the camera, when the signer does hand gestures.</li>
+<li>Connect the webcam with a USB cord (use a USB wire extender if the wire is not long enough)</li>
+<li>Wear a colored glove on the non dominant hand, so that open pose doesn't get confused while detecting hand keypoints.</li>
+</ul>
+<h4>Software Setup</h4>
+<p>Installing Requirements</p>
+<ul>
+<li>Setup OpenPose using these <a href="https://github.com/CMU-Perceptual-Computing-Lab/openpose/blob/master/doc/installation.md">steps</a></li>
+<li>Install the <code>phone-screen-show/APK/phone.apk</code> on an android phone.</li>
+<li>Install all the required python libraries using, <code>requirements_controller.txt</code> in the controller and <code>requirements_dpu.txt</code> in the DPU.</li>
+</ul>
+<p>Configuration</p>
+<ul>
+<li>Configure the project by editing <code>sensor-data-sender/config.json</code> file as per the description below</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">Variable</th>
+<th style="text-align:center">Description</th>
+<th style="text-align:center">Type</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">dev</td>
+<td style="text-align:center">Use mock data for developement</td>
+<td style="text-align:center">Boolean</td>
+</tr>
+<tr>
+<td style="text-align:center">dpu-ip</td>
+<td style="text-align:center">IP address of the DPU</td>
+<td style="text-align:center">String (Local IPv4)</td>
+</tr>
+<tr>
+<td style="text-align:center">rpi-ip</td>
+<td style="text-align:center">IP address of the controller</td>
+<td style="text-align:center">String (Local IPv4)</td>
+</tr>
+<tr>
+<td style="text-align:center">openpose-build-python</td>
+<td style="text-align:center">Build location of openpose python binaries</td>
+<td style="text-align:center">String (Directory)</td>
+</tr>
+<tr>
+<td style="text-align:center">openpose-build</td>
+<td style="text-align:center">Build location of openpose</td>
+<td style="text-align:center">String (Directory)</td>
+</tr>
+<tr>
+<td style="text-align:center">openpose-bin</td>
+<td style="text-align:center">Bin directory of openpose</td>
+<td style="text-align:center">String (Director)</td>
+</tr>
+<tr>
+<td style="text-align:center">openpose-model</td>
+<td style="text-align:center">location of openpose model</td>
+<td style="text-align:center">Boolean</td>
+</tr>
+<tr>
+<td style="text-align:center">right-handed</td>
+<td style="text-align:center">Is the signer right handed?</td>
+<td style="text-align:center">Boolean</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>Rest of the configuration variables acts as constants in the code base, to understand what they do properly, refer the python docstrings in the code.</li>
+</ul>
+<p>Execution:</p>
+<ul>
+<li>Run <code>data_sender.py</code> on the controller, once it says <code>wating</code> in the console, it is ready to get commands from the DPU.</li>
+<li>On DPU you can use the following scripts for their respective description,</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">Script</th>
+<th style="text-align:center">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">reciver_debug.py</td>
+<td style="text-align:center">Simply receives data from controller and displays it.</td>
+</tr>
+<tr>
+<td style="text-align:center">data_saver.py</td>
+<td style="text-align:center">Saves the data received from controller in file.</td>
+</tr>
+<tr>
+<td style="text-align:center">file_player.py</td>
+<td style="text-align:center">Shows the data of the target file in a Player.</td>
+</tr>
+<tr>
+<td style="text-align:center">count_rdf.py</td>
+<td style="text-align:center">Counts all the Raw Data Frames collected.</td>
+</tr>
+<tr>
+<td style="text-align:center">extract_features.py</td>
+<td style="text-align:center">Extract features of the collected data and saves it in a csv file.</td>
+</tr>
+<tr>
+<td style="text-align:center">dnn_train.py</td>
+<td style="text-align:center">Trains a neural network model with the extracted data and saves it.</td>
+</tr>
+<tr>
+<td style="text-align:center">predict_from_file.py</td>
+<td style="text-align:center">Runs prediction for a target file, (use for testing instead of realtime prediction for weak Systems)</td>
+</tr>
+<tr>
+<td style="text-align:center">predict_real_time.py</td>
+<td style="text-align:center">Runs prediction in realtime by receiving data from controller (Can only be used by Powerful Systems).</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>To configure, double click to play using <code>file_player.py</code>, simply double click on a data file and use <code>view_data.bat</code> to open it.</li>
+<li>Use the scripts to,  <code>Record Data &gt; Extract Feature &gt; Train &gt; Predict RealTime/File</code></li>
+<li>Note: if the <code>data_sender</code> becomes unresponsive, restart it in the controller.</li>
+</ul>
+<h3>Roadmap</h3>
+<p>Development for iSign has finished, but if the community requests new features or some bad design is noticed, I will try my best to add/change it.</p>
+<h3>How to contribute?</h3>
+<p>You can contribute this project by,</p>
+<ul>
+<li>Using the System and creating issue when any bug is encountered.</li>
+<li>Helping me in the development by bug squashing or developing new features. (If you want to do this, contact me so that we can collaborate.)</li>
+<li>Let me know if you have any good feature ideas.</li>
+</ul>
+<h3>Contact</h3>
+<p>If you have any problems or you want to contact me for feature ideas or want to collaborate in development you can contact me on <a href="http://discord.definex.in">DefineX Community discord server</a>.</p>
+<h3>Feeling generous?</h3>
+<p>You can donate me on <a href="https://www.paypal.me/AdamSaudagar">PayPal</a>.</p>
+<h3>License</h3>
+<p>This project is license to the Apache License 2.0, check out the full license over <a href="https://github.com/adsau59/isign/blob/master/LICENSE">here</a>.</p>
