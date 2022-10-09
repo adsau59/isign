@@ -1,5 +1,7 @@
 # iSign
-iSign is a sign language recognition system from the perspective of the signer. Get the most updated code from [GitHub](https://github.com/adsau59/isign).
+iSign is a sign language recognition system from the perspective of the signer. Get the most updated code from [GitHub](https://github.com/adsau59/isign). 
+
+You can also view the Black Book for the project [here](https://1drv.ms/b/s!Aj0862zYCr_-_VLgPKh7VcHyTcti?e=pSVj22).
 
 ![Signing](https://i.postimg.cc/nx61KzGf/wearing.jpg?dl=1)
 
